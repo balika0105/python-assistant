@@ -23,7 +23,7 @@ def ReadOut(input):
 def recogniseSpeech():
     try:
         with sr.Microphone() as source2:
-            print("DEBUG: Adjust for ambient noise start (shouldn't take long)")
+            # print("DEBUG: Adjust for ambient noise start (shouldn't take long)")
             r.adjust_for_ambient_noise(source2, duration=0.2)
 
             print("Speak > ", end = '')
