@@ -3,6 +3,7 @@
 
 # pip install pyttsx3
 # pip install speechrecognition
+# pip install pocketsphinx
 
 # For Windows: pip install pyaudio
 # For Linux: install python3-pyaudio from your distro's repo
@@ -22,13 +23,14 @@ def ReadOut(input):
 def recogniseSpeech():
     try:
         with sr.Microphone() as source2:
+            print("DEBUG: Adjust for ambient noise start (shouldn't take long)")
             r.adjust_for_ambient_noise(source2, duration=0.2)
 
             print("Speak > ", end = '')
 
             audio2 = r.listen(source2)
 
-            SpeechText = r.recognize_google(audio2)
+            SpeechText = r.recognize_sphinx(audio2)
             return SpeechText
     except:
         print("An error occured in speech recognition")
@@ -65,9 +67,11 @@ def mainLoop():
 def processcommand(command):
     match command:
         case "help":
-            return "No help yet"
+            return "help - shows this\nexit - closes program"
         case "exit":
             exit()
+        case _:
+            return command + ": Command not recognised"
 
 
 # Starts the whole process
